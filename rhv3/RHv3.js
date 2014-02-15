@@ -1,7 +1,7 @@
 /*
-/***		Right Hero for A1 & A2 
-/****		Version 3
-/***		Author: Chris Mo ~ chrismo@onekingslane.com
+ ***		Right Hero for A1 & A2 
+ ****		Version 3
+ ***		Author: Chris Mo ~ chrismo@onekingslane.com
 */
 
 // ----------------- Checks to see if there is a right hero, and if so, give it custom class ------------------
@@ -26,10 +26,8 @@ new_rightHero = function(a,b,c){
 // a = href
 // b = image src
 // c = event
-	/* _optimizely_evaluate=force */
 	var campaign = 'IM_Right_Hero_v3' +c;
 	var variation = c;
-	/* _optimizely_evaluate=safe */
 	
 	$('.olyRightHero img').replaceWith("<a class="+c+" href="+a+" target='_self'><img src="+b+"></a>");
 	if ($('#contextualContent').length > 0){
@@ -75,7 +73,7 @@ swap_RH = function (a){
 			- ADD "rh_lp" for e3 header
 		*/
 		case 1: //  Top Picks ~ has e3 header
-			new_rightHero("/discover?results=102", "https://cdn.optimizely.com/img/7259088/7fd5485040cb47c59376b48284cfb8ca.png","Top Picks");
+			new_rightHero("/discover?results=102&rh_lp=toppicks", "https://cdn.optimizely.com/img/7259088/7fd5485040cb47c59376b48284cfb8ca.png","Top Picks");
 			break;	
 		//*****************************
 
@@ -100,7 +98,7 @@ swap_RH = function (a){
 			- ADD "rh_lp" for e3 header
 		*/
 		case 4: // Members Pick ~ has e3 header
-			new_rightHero("/discover?results=102", "https://cdn.optimizely.com/img/7259088/0d8e4ea8055e45c38692d071ff1ca02f.png","Members Pick 1");
+			new_rightHero("/discover?results=102&rh_lp=memberspicks", "https://cdn.optimizely.com/img/7259088/0d8e4ea8055e45c38692d071ff1ca02f.png","Members Pick");
 			break;
 		//*****************************
 
@@ -113,11 +111,10 @@ swap_RH = function (a){
 
 
 		/*  TO DO
-			- FIND NEW LANDING PAGE 
-			- Keep rh_lp=gifts
+			- get landing page approved
 		*/
 		case 6: // Gifts We Love ~ Updated for v3
-			new_rightHero("", "https://cdn.optimizely.com/img/7259088/78ba11350ec341af8b583cf365450259.png", "Gifts We Love");
+			new_rightHero("/discover?results=102&rh_lp=gifts", "https://cdn.optimizely.com/img/7259088/78ba11350ec341af8b583cf365450259.png", "Gifts We Love");
 			break; 
 	}
 }

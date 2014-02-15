@@ -1,7 +1,7 @@
-var parameterName_1 = "CMutm_medium";
-var parameterValueToCheck_medium_1 = "CMdisplay";
-var parameterValueToCheck_medium_2 = "CMsearch";
-var parameterValueToCheck_medium_3 = "CMsearch|vmf";
+var parameterName_1 = "utm_medium";
+var parameterValueToCheck_medium_1 = "display";
+var parameterValueToCheck_medium_2 = "search";
+var parameterValueToCheck_medium_3 = "search|vmf";
 
 var optimizelyMatch = false;
 var parameterValue = "";
