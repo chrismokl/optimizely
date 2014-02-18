@@ -1,3 +1,4 @@
+/*
 $('#modalSignup-join-a form').submit(function(){
 	console.log('join a submit success');
 	var $field = $('#modalSignup-join-b p');
@@ -30,7 +31,7 @@ $('#modalSignup-join-a form').submit(function(){
 	  $field.find(':eq(2)').attr('value', 'nopa55word!');
 	});
 });
-
+*/
 $('#modalSignup-join-a form').submit(function(){
 	$.ajax({
 		success: function(){
