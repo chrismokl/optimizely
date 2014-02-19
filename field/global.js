@@ -1,5 +1,5 @@
-/*
-$('#modalSignup-join-a form').submit(function(){
+
+/*$('#modalSignup-join-a form').submit(function(){
 	$('#modalSignup-join-a form').ajaxSuccess(function(){
 	console.log('got into first ajaxsuccess');
 	  $('#signupModal').hide();
@@ -14,14 +14,21 @@ $('#modalSignup-join-a form').submit(function(){
 	});
 });
 */
-$('#modalSignup-join-a form').submit(function(){
-	$.ajax({
-		success: function(){
+$('.formBtns.clearfix.join button').unbind();
+$('#modalSignup-join-a button').(function(e){
+	e.preventDefault();
+	console.log('giberish');
+	$(this).off('submit');
+	$.post('/customers/sign-up-step-one.json',function(data){
+		console.log(data);
+		if (data.status == '1'){
 			console.log('success');
-		},
-		error: function(){
+		}	
+		else {
 			console.log('failure');
-		}
+		}	
 	});
 });
+
+
 
