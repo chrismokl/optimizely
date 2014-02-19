@@ -14,8 +14,8 @@
 	});
 });
 */
-$('.formBtns.clearfix.join button').unbind();
-$('#modalSignup-join-a button').(function(e){
+$('.formBtns.clearfix.join button').replaceWith('<button type="submit" id="shop-now-button">Shop Now</button>');
+$('#shop-now-button').submit(function(e){
 	e.preventDefault();
 	console.log('giberish');
 	$(this).off('submit');
