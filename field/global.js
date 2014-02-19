@@ -14,10 +14,10 @@
 	});
 });
 */
-$('.formBtns.clearfix.join button').replaceWith('<button type="submit" id="shop-now-button">Shop Now</button>');
-$('#shop-now-button').submit(function(e){
-	e.preventDefault();
-	console.log('giberish');
+$('.formBtns.clearfix.join button').replaceWith('<button type="submit" id="shop-now-button">Shop Now</button>').remove();
+console.log('replaced button');
+$('#shop-now-button').submit(function(){
+	console.log('got into submit function');
 	$(this).off('submit');
 	$.post('/customers/sign-up-step-one.json',function(data){
 		console.log(data);
