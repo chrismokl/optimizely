@@ -1,0 +1,19 @@
+#shop-now-button {
+	background: #f96b42;
+	border: 0 none;
+	color: #fff;
+	cursor: pointer;
+	letter-spacing: 0.1em;
+	padding: .5em 11px .4em;
+	text-align: center;
+	text-transform: uppercase;
+	text-decoration: none;
+	vertical-align: middle;
+	background-color: #357749;
+	font-family: "trebuchet ms", sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 21px;
+	width: 94px;
+}

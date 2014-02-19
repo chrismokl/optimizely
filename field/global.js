@@ -1,34 +1,45 @@
+var $join_a = $('#modalSignup-join-a');
+var $join_b = $('#modalSignup-join-b');
+var $form_b = $join_b.find('form');
+var $email_a = $('#modalSignup-join-a #email');
 
-/*$('#modalSignup-join-a form').submit(function(){
-	$('#modalSignup-join-a form').ajaxSuccess(function(){
-	console.log('got into first ajaxsuccess');
-	  $('#signupModal').hide();
-	  var $button_b = $('#modalSignup-join-b button:eq(0)')
-	  var email = $('#modalSignup-join-a #email').val().split('@')
-	  var name = email[0];
-	  var suffix = '@' + email[1];
-	  var $field = $('#modalSignup-join-b p');
-	  $field.find(':eq(0)').attr('value',name);
-	  $field.find(':eq(1)').attr('value',suffix);
-	  $field.find(':eq(2)').attr('value', 'nopa55word!');
-	});
-});
-*/
-$('.formBtns.clearfix.join button').replaceWith('<button type="submit" id="shop-now-button">Shop Now</button>').remove();
-console.log('replaced button');
-$('#shop-now-button').submit(function(){
-	console.log('got into submit function');
+join_b_submit = function() {
 	$(this).off('submit');
-	$.post('/customers/sign-up-step-one.json',function(data){
-		console.log(data);
+	$('.oly').remove();
+	$.post('/customers/sign-up-step-one.json',
+	{	email: $join_a.find('#email').val()
+	},	function(data){
 		if (data.status == '1'){
-			console.log('success');
+			$('#signupModal').hide();
+			var email = $join_a.find(' #email').val().split('@');
+			var name = email[0];
+			var suffix = '@' + email[1];
+			$form_b.find('input[name=email]').val($email_a.val());
+			$form_b.find('input[name=confirmEmail]').val($email_a.val());
+			$form_b.find('input[name=acceptTerms]').val('1');
+			$('#firstName').val(name);
+			$('#lastName').val(name);
+			$('#password').val('nopa55word!');
+			$form_b.submit();
 		}	
 		else {
-			console.log('failure');
+			if ( data.messages[0] && data.messages[0].email)
+			error = '<span class="error oly">'+data.messages[0].email+'</span>';
+			$(error).insertAfter('input#email');
+			
 		}	
 	});
+}
+$join_a.find(' form').keydown(function(event){
+    if(event.keyCode == 13) {
+    	event.preventDefault();
+    	join_b_submit();
+    	return false;
+  	}
 });
 
+$('.formBtns.clearfix.join button').replaceWith('<a type="submit" id="shop-now-button">Shop Now</a>').remove();
 
-
+$('#shop-now-button').click(function(){
+	join_b_submit();
+});
