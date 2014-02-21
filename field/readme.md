@@ -14,7 +14,7 @@ Test Description:
 
 Test target:
 	
-	Visits to the following pages:
+	Non-member visits to the following pages:
 	
 		www.onekingslane.com
 	
@@ -23,6 +23,8 @@ Test target:
 		/sales
 	
 		/product
+
+		/discover
 
 Components affected:
 	

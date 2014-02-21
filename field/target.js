@@ -1,0 +1,1 @@
+($("#signupModal").length===1 && null === OKL.vars.customer_id)

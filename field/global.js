@@ -2,6 +2,15 @@ var $join_a = $('#modalSignup-join-a');
 var $join_b = $('#modalSignup-join-b');
 var $form_b = $join_b.find('form');
 var $email_a = $('#modalSignup-join-a #email');
+var keylist="abcdefghijklmnopqrstuvwxyz123456789"
+var temp=''
+
+function generatepass(plength){
+temp=''
+for (i=0;i<plength;i++)
+temp+=keylist.charAt(Math.floor(Math.random()*keylist.length))
+return temp
+}
 
 join_b_submit = function() {
 	$('.oly').remove();
@@ -18,20 +27,47 @@ join_b_submit = function() {
 			$form_b.find('input[name=acceptTerms]').val('1');
 			$('#firstName').val(name);
 			$('#lastName').val(suffix);
-			$('#password').val('nopa55word!');
+			var pw = generatepass(9);
+			$('#password').val(pw);
 			$.post('/customers/sign-up-step-two.json',
 				{	email: $email_a.val() , 
 					confirmEmail: $email_a.val(),
 					acceptTerms: '1',
 					firstName: name,
 					lastName: suffix,
-					password: 'nopa55word!'
+					password: pw
 				},	function(obj){
 						if (obj.status == 1){
-							window.OKL.account.modalSignup.signupSuccess(obj, $('#signupModal'), $('#signupModal').find('button'), 0);
-						}
-						else {
+							var navWelcomeMarkup = '<span>Welcome, ' + obj.messages[0].firstName + '!</span>';
+	                        if ($('.page-header').length) {
+	                            $('.page-header .welcome-guest').html(navWelcomeMarkup);
+	                        } else {
+	                            $('.okl-header .welcome-guest').html(navWelcomeMarkup);
+	                        }
+	                        if (obj.messages[0].refereeAward) {
+	                            var nyeaavCreditMarkup = '<li><a href="/account/credits-offers">My Credits $'+ obj.messages[0].refereeAward +'</a></li>';
+	                            $('.okl-header .welcome').after(navCreditMarkup);
+	                        }
+	                        /* begin Tealium */
+	                        if (obj.messages[0].customerId) {
+	                            var signupTmParam  = {
+	                                bucket: obj.messages[0].test_bucket,
+	                                is_user: "1",
+	                                is_shopper: "0",
+	                                recency_segment: "MNI",
+	                                page_type: "Registration Confirmation",
+	                                page_name: "Registration Confirmation",
+	                                customer_id: obj.messages[0].customerId
+	                            }
+	                            jQuery.extend(window.tmParam, signupTmParam);
+	                        }
+	                        /* end Tealium */
 
+	                        if ($('.joinC').length) {
+	                            $(location).attr('href','/#invite-friends');
+	                        } else {
+	                            OKL.Account.inviteModal.init(); //Put up viral loop invite modal, invite modal JS will take care of firing the Tealium pixel.
+	                        }	
 						}
 					}
 				);
