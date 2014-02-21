@@ -19,8 +19,12 @@ window.jQuery.ajax({
 var d = $('.sortable-container li.product');
 
 for (var item in d){
-  var x = d.eq(item).find('img[src]').attr('src').split('_')[1].substring(0,3);
-  if ( x == "BUI")
+  var x = d.eq(item).find('img[src]').attr('src');
+  var y;
+  if (x != undefined){
+  	y = x.split('_')[1].substring(0,3);
+  }
+  if ( y == "BUI")
   {
     d.eq(item).find('div > del').hide();
   }
@@ -38,3 +42,4 @@ window.jQuery.ajax({
     		}
   		}
 	});
+// END OF CONTROL CODE
